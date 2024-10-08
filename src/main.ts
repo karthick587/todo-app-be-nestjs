@@ -9,8 +9,10 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
     transform: true,
   }));
-  app.setGlobalPrefix('api'); 
-  app.enableCors(); // If you need CORS
+  app.setGlobalPrefix('api');
+  app.enableCors({
+    origin: '*', // Allows all origins
+  });
   await app.listen(3000);
 }
 bootstrap();
