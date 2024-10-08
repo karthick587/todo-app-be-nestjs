@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { TodoService } from './todo.service';
-import { Todo } from './todo.schema';
 import { TodoDto } from './todo.dto';
 
 @Controller('todo')
@@ -8,6 +7,7 @@ export class TodoController {
     constructor(private readonly todoService: TodoService) { }
 
     @Post()
+
     create(@Body() todo: TodoDto) {
         return this.todoService.create(todo);
     }
