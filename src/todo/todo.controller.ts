@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { Todo } from './todo.schema';
 import { TodoDto } from './todo.dto';
@@ -8,7 +8,7 @@ export class TodoController {
     constructor(private readonly todoService: TodoService) { }
 
     @Post()
-    create(@Body() todo: TodoDto, @Res() res: Response) {
+    create(@Body() todo: TodoDto) {
         return this.todoService.create(todo);
     }
 
@@ -25,7 +25,7 @@ export class TodoController {
         return this.todoService.findOne(id);
     }
 
-    @Put(":id")
+    @Put()
     update(@Param("id") id: string, @Body() todo: Partial<TodoDto>) {
         if (!id) {
             throw new HttpException('Error: ID is required', HttpStatus.NOT_FOUND);
