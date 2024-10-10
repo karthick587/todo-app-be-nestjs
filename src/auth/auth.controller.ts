@@ -18,7 +18,13 @@ export class AuthController {
     @Get('validate')
     async validateToken(@Req() request: Request) {
         const token = request.headers['authorization']?.replace('Bearer ', ''); // Remove 'Bearer ' prefix
+        if (!token) {
+            throw new UnauthorizedException('Authentication token is missing or not provided.');
+        }
         const result = await this.authService.validateToken(token);
+        if (!token) {
+            throw new UnauthorizedException('Invalid Authentication token');
+        }
         return result
     }
 }
